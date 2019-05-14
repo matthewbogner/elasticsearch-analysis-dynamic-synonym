@@ -111,6 +111,7 @@ public class DynamicSynonymTokenFilterFactory extends
 
     @Override
     public TokenStream create(TokenStream tokenStream) {
+        // fst is null means no synonyms
         if (synonymMap == null || synonymMap.fst == null) {
             return tokenStream;
         }
@@ -118,7 +119,6 @@ public class DynamicSynonymTokenFilterFactory extends
         DynamicSynonymFilter dynamicSynonymFilter = new DynamicSynonymFilter(tokenStream, synonymMap, ignoreCase);
         dynamicSynonymFilters.put(dynamicSynonymFilter, 1);
 
-        // fst is null means no synonyms
         return dynamicSynonymFilter;
     }
 
